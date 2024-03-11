@@ -41,4 +41,4 @@ DOI: 12.3456/cool-stuff
 
 ## Contact
 
-- [micha.birklbauer@gmail.at](mailto:micha.birklbauer@gmail.at)
+- [micha.birklbauer@gmail.com](mailto:micha.birklbauer@gmail.com)
