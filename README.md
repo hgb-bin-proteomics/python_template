@@ -2,7 +2,7 @@
 
 # Template Repository for Python Scripts
 
-A template repository for linting, testing and GUI building for python scripts.
+A template repository for linting, testing, GUI building and dockerizing python scripts.
 
 ## Checklist
 
