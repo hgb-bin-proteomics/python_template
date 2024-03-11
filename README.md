@@ -41,4 +41,4 @@ DOI: 12.3456/cool-stuff
 
 ## Contact
 
-- [micha.birklbauer@fh-hagenberg.at](mailto:micha.birklbauer@fh-hagenberg.at)
+- [micha.birklbauer@gmail.at](mailto:micha.birklbauer@gmail.at)
