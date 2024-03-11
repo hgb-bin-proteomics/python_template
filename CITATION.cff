@@ -2,7 +2,7 @@ cff-version: 1.2.0
 preferred-citation:
   type: article
   authors:
-  - family-names: "Last name"
+  - family-names: "Last Name"
     given-names: "First Name"
     orcid: "https://orcid.org/1234-5678-1234-5678"
   doi: "12.3456/cool-stuff"
