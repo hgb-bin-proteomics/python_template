@@ -19,6 +19,16 @@ A template repository for linting, testing, GUI building and dockerizing python 
 - Replace lines 3 - 6 and write your gui in `gui/streamlit_app.py`.
 - Replace lines 3 - 6 and write tests in `tests/tests.py`.
 - Add your requirements to `requirements.txt`.
+- Document your script with [Sphinx](https://www.sphinx-doc.org/):
+  - Install Sphinx and the [PyData](https://github.com/pydata/pydata-sphinx-theme) theme: `pip install sphinx pydata-sphinx-theme`.
+  - Adjust the configuration to your needs in `docs_src/conf.py`.
+  - Write documentation!
+  - Build documentation with:
+    ```
+    sphinx-apidoc -f -o docs_src .
+    sphinx-build -M html docs_src docs
+    ```
+  - Publish documentation [optional]!
 - Adjust this `README.md` to your needs!
 
 ## Known Issues
