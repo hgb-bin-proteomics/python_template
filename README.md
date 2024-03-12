@@ -29,6 +29,7 @@ A template repository for linting, testing, GUI building and dockerizing python 
     sphinx-build -b html docs_src docs
     ```
   - Publish documentation [optional]!
+    - Serving with GitHub pages needs the addition of an empty `.nojekyll` file to your `/docs`.
 - Adjust this `README.md` to your needs!
 
 ## Known Issues
