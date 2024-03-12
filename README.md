@@ -26,7 +26,7 @@ A template repository for linting, testing, GUI building and dockerizing python 
   - Build documentation with:
     ```
     sphinx-apidoc -f -o docs_src .
-    sphinx-build -M html docs_src docs
+    sphinx-build -b html docs_src docs
     ```
   - Publish documentation [optional]!
 - Adjust this `README.md` to your needs!
