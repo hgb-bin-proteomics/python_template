@@ -19,6 +19,7 @@ param_2 = 2
 
 #########################
 
+docs = \
 """
 DESCRIPTION:
 A description of the script [multiplies two integers].
@@ -47,11 +48,56 @@ import pandas as pd
 ####### FUNCTIONS #######
 
 def my_product(x: int, y: int) -> int:
+    """Returns the product of two integer numbers.
+
+    Parameters
+    ----------
+    x : int
+        The first factor.
+    y : int, default = 2
+        The second factor.
+
+    Returns
+    -------
+    product : int
+        The product of x and y.
+
+    Examples
+    --------
+    >>> from main import my_product
+    >>> product = my_product(1, 2)
+    >>> product
+    2
+    """
+
     return x * y
 
 ##### MAIN FUNCTION #####
 
 def main(argv = None) -> int:
+    """Main function.
+
+    Parameters
+    ----------
+    argv : list, default = None
+        Arguments passed to argparse.
+
+    Returns
+    -------
+    product : int
+        The product of given arguments.
+
+    Examples
+    --------
+    >>> from main import main
+    >>> product = main(["-f1", "1", "-f2", "2"])
+    >>> product
+    2
+    >>> product = main(["-f1", "3"])
+    >>> product
+    6
+    """
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-f1", "--factor1",
                         dest = "f1",
