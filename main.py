@@ -47,6 +47,9 @@ import pandas as pd
 
 ####### FUNCTIONS #######
 
+# these examples use the numpy docstring style
+# https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard
+
 def my_product(x: int, y: int) -> int:
     """Returns the product of two integer numbers.
 
