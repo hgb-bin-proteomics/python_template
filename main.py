@@ -5,12 +5,22 @@
 # https://github.com/michabirklbauer/
 # micha.birklbauer@gmail.com
 
+
+##### REQUIREMENTS ######
+
+# pip install pandas
+
+#########################
+
+# import packages
+import argparse
+# import pandas as pd
+
+######## VERSION ########
+
 # version tracking
 __version = "1.0.0"
 __date = "2024-03-11"
-
-# REQUIREMENTS
-# pip install pandas
 
 ###### PARAMETERS #######
 
@@ -37,12 +47,6 @@ optional arguments:
     --version
         Show program's version number and exit.
 """
-
-#########################
-
-# import packages
-import argparse
-import pandas as pd
 
 ####### FUNCTIONS #######
 
