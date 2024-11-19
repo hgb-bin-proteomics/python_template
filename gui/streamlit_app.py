@@ -56,7 +56,7 @@ def main_page():
         compute = st.button("Compute!", type="primary")
 
     if compute:
-        st.success(f"The product of {f1} and {f2} is {my_product(f1, f2)}")
+        st.success(f"The product of {f1} and {f2} is {my_product(int(f1), int(f2))}")
 
 
 # side bar and main page loader

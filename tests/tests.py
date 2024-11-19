@@ -14,7 +14,7 @@ def test1():
     from main import my_product
 
     for i, row in df.iterrows():
-        assert my_product(row["x"], row["y"]) == row["x"] * row["y"]
+        assert my_product(int(row["x"]), int(row["y"])) == int(row["x"]) * int(row["y"])
 
 
 def test2():
