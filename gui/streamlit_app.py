@@ -5,6 +5,10 @@
 # https://github.com/michabirklbauer/
 # micha.birklbauer@gmail.com
 
+## disable unused variable checks for streamlit variables
+
+# ruff: noqa: F841
+
 """
 #####################################################
 ##                                                 ##
