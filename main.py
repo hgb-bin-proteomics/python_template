@@ -19,8 +19,7 @@ param_2 = 2
 
 #########################
 
-docs = \
-"""
+docs = """
 DESCRIPTION:
 A description of the script [multiplies two integers].
 USAGE:
@@ -50,6 +49,7 @@ import pandas as pd
 # these examples use the numpy docstring style
 # https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard
 
+
 def my_product(x: int, y: int) -> int:
     """Returns the product of two integer numbers.
 
@@ -75,9 +75,11 @@ def my_product(x: int, y: int) -> int:
 
     return x * y
 
+
 ##### MAIN FUNCTION #####
 
-def main(argv = None) -> int:
+
+def main(argv=None) -> int:
     """Main function.
 
     Parameters
@@ -102,16 +104,22 @@ def main(argv = None) -> int:
     """
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-f1", "--factor1",
-                        dest = "f1",
-                        required = True,
-                        help = "First factor of multiplication.",
-                        type = int)
-    parser.add_argument("-f2", "--factor2",
-                        dest = "f2",
-                        default = 2,
-                        help = "Second factor of multiplication.",
-                        type = int)
+    parser.add_argument(
+        "-f1",
+        "--factor1",
+        dest="f1",
+        required=True,
+        help="First factor of multiplication.",
+        type=int,
+    )
+    parser.add_argument(
+        "-f2",
+        "--factor2",
+        dest="f2",
+        default=2,
+        help="Second factor of multiplication.",
+        type=int,
+    )
     args = parser.parse_args(argv)
 
     p = my_product(args.f1, args.f2)
@@ -119,8 +127,8 @@ def main(argv = None) -> int:
 
     return p
 
+
 ######## SCRIPT #########
 
 if __name__ == "__main__":
-
     m = main()
