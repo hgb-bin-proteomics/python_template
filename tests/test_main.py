@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 # SCRIPT NAME - TESTS
-# 2023 (c) Micha Johannes Birklbauer
-# https://github.com/michabirklbauer/
-# micha.birklbauer@gmail.com
+# 2026 (c) YOUR NAME
+# https://github.com/username/
+# your.mail@mail.com
 
 
 def test1():
@@ -22,3 +22,11 @@ def test2():
 
     assert main(["-f1", "20"]) == 40
     assert main(["-f1", "2", "-f2", "3"]) == 6
+
+
+def test3():
+    from streamlit.testing.v1 import AppTest
+
+    at = AppTest.from_file("streamlit_app.py", default_timeout=30.0)
+    at.run(timeout=60.0)
+    assert not at.exception
