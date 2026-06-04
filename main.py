@@ -9,6 +9,11 @@
 # ///
 # PLEASE BE AWARE THAT SCRIPT METADATA WILL OVERRIDE THE PYPROJECT.TOML
 
+# SCRIPT NAME
+# 2026 (c) YOUR NAME
+# https://github.com/username/
+# your.mail@mail.com
+
 from __future__ import annotations
 
 import argparse
