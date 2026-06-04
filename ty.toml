@@ -15,4 +15,4 @@ all = "error"
 
 [environment]
 python-platform = "all"
-python-version = "3.7"
+python-version = "3.12"

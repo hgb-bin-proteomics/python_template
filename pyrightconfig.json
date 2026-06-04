@@ -8,6 +8,6 @@
     "**/.venv"
   ],
 
-  "pythonVersion": "3.7",
+  "pythonVersion": "3.12",
   "pythonPlatform": "Linux"
 }
