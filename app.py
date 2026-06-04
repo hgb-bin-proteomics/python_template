@@ -1,16 +1,9 @@
 #!/usr/bin/env python3
-#
-# /// script
-# requires-python = ">=3.12"
-# dependencies = [
-#   "streamlit",
-# ]
-# ///
 
-# SCRIPT NAME GUI
-# 2024 (c) Micha Johannes Birklbauer
-# https://github.com/michabirklbauer/
-# micha.birklbauer@gmail.com
+# SCRIPT NAME - GUI
+# 2026 (c) YOUR NAME
+# https://github.com/username/
+# your.mail@mail.com
 
 ## disable unused variable checks for streamlit variables
 
@@ -24,8 +17,26 @@
 #####################################################
 """
 
+import os
+from tempfile import NamedTemporaryFile
+
 import streamlit as st
-from main import my_product
+from streamlit.runtime.uploaded_file_manager import UploadedFile
+from main import Character, character_factory, battle
+
+from typing import List
+
+
+@st.cache_data
+def read_characters(
+    uploaded_file: UploadedFile,
+) -> List[Character]:
+    with NamedTemporaryFile(
+        suffix=os.path.splitext(uploaded_file.name)[1], delete_on_close=False
+    ) as f:
+        f.write(uploaded_file.getbuffer())
+        f.close()
+        return character_factory(f.name)
 
 
 # main page content
@@ -37,33 +48,66 @@ def main_page():
     """
     description = st.markdown(general_description)
 
-    header_1 = st.subheader("Product", divider="rainbow")
+    header_1 = st.subheader("Battle Simulator", divider="rainbow")
 
-    f1 = st.number_input(
-        "Number 1:",
-        min_value=1,
-        max_value=10000,
-        value=1,
-        step=1,
-        help="First factor of multiplication.",
+    uploaded_file = st.file_uploader(
+        "Upload a Character file:",
+        type=["csv"],
+        accept_multiple_files=False,
+        key="uploaded_file",
+        help="Upload a csv file containing character information of at least two characters.",
     )
 
-    f2 = st.number_input(
-        "Number 2:",
-        min_value=1,
-        max_value=10000,
-        value=2,
-        step=1,
-        help="Second factor of multiplication.",
+    health = st.number_input(
+        "Character health:",
+        min_value=1.0,
+        max_value=10000.0,
+        value=130.0,
+        step=1.0,
+        help="How many hit points the characters have.",
     )
 
-    l1, l2, center_button, r1, r2 = st.columns(5)
+    if "astarion" not in st.session_state:
+        st.session_state["astarion"] = 0
+    if "shadowheart" not in st.session_state:
+        st.session_state["shadowheart"] = 0
 
-    with center_button:
-        compute = st.button("Compute!", type="primary")
+    total_wins = st.markdown(
+        f"Astarion won a total of {st.session_state['astarion']} times and Shadowheart won a total of {st.session_state['shadowheart']} times!"
+    )
+
+    l1, l2, center, r1, r2 = st.columns(5)
+
+    with center:
+        compute = st.button("Battle!", type="secondary", width="stretch")
 
     if compute:
-        st.success(f"The product of {f1} and {f2} is {my_product(int(f1), int(f2))}")
+        if uploaded_file is not None:
+            characters = read_characters(uploaded_file)
+            if len(characters) < 2:
+                st.error("You need to upload a file with at least two characters!")
+            else:
+                winner = battle(characters[0], characters[1], health=float(health))
+                if winner.name == "Astarion":
+                    st.session_state["astarion"] += 1
+                    st.success("Astarion won the battle!")
+                    with center:
+                        st.image(
+                            "https://bg3.wiki/w/images/3/3c/Astarion.png",
+                            caption="(c) Larian Studios",
+                            width="stretch",
+                        )
+                if winner.name == "Shadowheart":
+                    st.session_state["shadowheart"] += 1
+                    st.success("Shadowheart won the battle!")
+                    with center:
+                        st.image(
+                            "https://bg3.wiki/w/images/f/f9/Shadowheart.png",
+                            caption="(c) Larian Studios",
+                            width="stretch",
+                        )
+        else:
+            st.error("You need to upload a file with at least two characters!")
 
 
 # side bar and main page loader
@@ -87,22 +131,22 @@ def main():
     title = st.sidebar.title("TITLE")
 
     logo = st.sidebar.image(
-        "https://user-images.githubusercontent.com/7164864/217935870-c0bc60a3-6fc0-4047-b011-7b4c59488c91.png",
-        caption="CAPTION",
+        "https://baldursgate3.game/png/logo-bg3.png",
+        caption="(c) Larian Studios",
     )
 
     doc = st.sidebar.markdown(about_str)
 
-    citing_str = "**Citing:** CITATION INFO"
+    citing_str = "**Citing:**\n- CITATION INFO"
     citing = st.sidebar.markdown(citing_str)
 
-    contact_str = "**Contact:** CONTACT INFO"
+    contact_str = "**Contact:**\n- CONTACT INFO"
     contact = st.sidebar.markdown(contact_str)
 
-    license_str = "**License:** [MIT License](https://github.com/YOUR_REPO/blob/master/LICENSE.md)"
+    license_str = "**License:**\n- [MIT License](https://github.com/YOUR_REPO/blob/master/LICENSE.md)"
     license = st.sidebar.markdown(license_str)
 
-    project_str = "**Project Page:** [GitHub](https://github.com/YOUR_REPO/)"
+    project_str = "**Project Page:**\n- [GitHub](https://github.com/YOUR_REPO/)"
     project = st.sidebar.markdown(project_str)
 
     main_page()
