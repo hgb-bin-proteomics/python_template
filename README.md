@@ -35,13 +35,27 @@ A template repository for linting, testing, GUI building and dockerizing python 
     - Serving with GitHub pages needs the addition of an empty `.nojekyll` file to your `/html`.
 - Adjust this `README.md` to your needs!
 
+## Getting Help
+
+- Help for this template:
+  - [uv](https://docs.astral.sh/uv/): Python project and dependency management.
+  - [ruff](https://astral.sh/ruff): Python linter and formatter.
+  - [ty](https://docs.astral.sh/ty/): Python type checker.
+  - [pyright](https://github.com/microsoft/pyright): Python type checker.
+  - [pytest](https://docs.pytest.org/en/stable/): Python testing suit.
+  - [GitHub Actions](https://docs.github.com/en/actions): Used for running the above automatically.
+- Contact: [micha.birklbauer@gmail.com](mailto:micha.birklbauer@gmail.com)
+
+> [!IMPORTANT]
+> The below sections should be adjusted and updated by you!
+
 ## Known Issues
 
 [List of known issues](https://github.com/michabirklbauer/python_template/issues)
 
 ## Citing
 
-If you are using PLACEHOLDER script please cite:
+If you are using PLACEHOLDER please cite:
 ```
 Very important title
 Important Author, and Another Important Author
@@ -55,4 +69,4 @@ DOI: 12.3456/cool-stuff
 
 ## Contact
 
-- [micha.birklbauer@gmail.com](mailto:micha.birklbauer@gmail.com)
+- [your.mail@mail.com](mailto:your.mail@mail.com)
