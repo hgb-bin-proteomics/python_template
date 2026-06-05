@@ -32,14 +32,18 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
     - In the repository go to `Settings` ➡️ `Pages` ➡️ `Build and deployment` ➡️ `Source` ➡️ `GitHub Actions`.
     - Select the `gh-pages.yml` / `Deploy Documentation to Pages` workflow.
   - Or build manually:
-    - Install Sphinx and the [PyData](https://github.com/pydata/pydata-sphinx-theme) theme: `pip install sphinx pydata-sphinx-theme`.
-    - Build documentation with:
+    - Install Sphinx and the [PyData](https://github.com/pydata/pydata-sphinx-theme) theme:
+      ```bash
+      pip install sphinx pydata-sphinx-theme myst-parser sphinx-copybutton
       ```
+    - Build documentation with:
+      ```bash
       sphinx-apidoc -f -o docs .
       sphinx-build -b html docs html
       ```
     - Publish documentation [optional]!
     - Serving with GitHub pages needs the addition of an empty `.nojekyll` file to your `/html`.
+- [ ] Decide on a type checker and delete the other!
 - [ ] Adjust this `README.md` to your needs!
 
 ## Helpful Commands
