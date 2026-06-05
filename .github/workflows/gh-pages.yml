@@ -44,7 +44,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Build with Sphinx
         run: |
-          sphinx-apidoc -f -o docs .
+          sphinx-apidoc -f -o docs . app.py
           sphinx-build -b html docs html
       - name: Add .nojekyll
         run: echo "" > html/.nojekyll
