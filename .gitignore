@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Sphinx auto-generated files
+docs/modules.rst
+docs/main.rst
