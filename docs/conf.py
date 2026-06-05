@@ -48,7 +48,7 @@ html_show_sourcelink = False
 html_theme_options = {
     "logo": {
         "alt_text": "Example logo",
-        "text": "Example logo",
+        "text": "Example",
         "image_light": "icons/icon.png",
         "image_dark": "icons/icon.png",
     },
