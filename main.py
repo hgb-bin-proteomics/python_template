@@ -29,43 +29,75 @@ __date = "2024-03-11"
 
 logger = logging.getLogger(__name__)
 
-r"""
-DESCRIPTION:
-A description of the script [multiplies two integers].
-USAGE:
-main.py [-f1 --factor1]
-        [-f2 --factor2]
-required arguments:
-    -f1 int, --factor1 int
-        First factor of multiplication.
-optional arguments:
-    -f2 int, --factor2
-        Second factor of multiplication.
-        Default: 2
-    -h, --help
-        Show this help message and exit.
-    --version
-        Show program's version number and exit.
-"""
-
 # these examples use the numpy docstring style
 # https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard
 
 
 class Character(BaseModel):
+    r"""Core data structure representing a character.
+
+    Bases Pydantic `BaseModel <https://pydantic.dev/docs/validation/latest/api/pydantic/base_model/#pydantic.BaseModel>`_.
+
+    Attributes Summary
+    ------------------
+    Here is a short summary about the class attributes, for more details
+    on the specific Pydantic validation requirements please refer to the corresponding attributes
+    themselves.
+
+    Required
+    ^^^^^^^^
+    The following attributes are required:
+
+    name : str
+        The name of the character.
+
+    Optional
+    ^^^^^^^^
+    The following attributes are optional:
+
+    race : one of "Elf", "Half-Elf", "Human", or None, default = None
+        The race of the character. Should be one of Elf, Half-Elf, or Human.
+    min_damage : float, default = 0.0
+        Minimum damage the character deals.
+    max_damage : float, default = 0.0
+        Maximum damage the character deals.
+
+    Notes
+    -----
+    Minimum and maximum damage are automatically switched depending on which is
+    greater.
+
+    Examples
+    --------
+    >>> from main import Character
+    >>> character = Character(name="John Baldur")
+    """
+
     name: Annotated[str, Field(frozen=True, description="Name of the character.")]
     r"""
+    Name of the character.
     """
     race: Annotated[
         Optional[Literal["Elf", "Half-Elf", "Human"]],
         Field(frozen=True, description="Race of the character."),
     ] = None
+    r"""
+    Race of the character. Should be one of Elf, Half-Elf, or Human.
+    """
     min_damage: Annotated[
         float, Field(frozen=False, description="Minimum damage the character deals.")
     ] = 0.0
+    r"""
+    Minimum damage the character deals. Is automatically switched with max_damage
+    if max_damage is smaller.
+    """
     max_damage: Annotated[
         float, Field(frozen=False, description="Maximum damage the character deals.")
     ] = 0.0
+    r"""
+    Maximum damage the character deals. Is automatically switched with min_damage
+    if min_damage is greater.
+    """
 
     model_config = ConfigDict(
         validate_assignment=True, strict=True, str_strip_whitespace=True
@@ -113,6 +145,26 @@ class Character(BaseModel):
         return hasattr(self, key)
 
     def copy_with_update(self, update: Dict[str, Any] = {}) -> Character:
+        r"""Creates a deep copy of the class with optional attribute updates.
+
+        Parameters
+        ----------
+        update : dict of str, any, default = empty dict
+            Dictionary mapping attribute names (str) to their updated values.
+            The default (empty dict) will create a deep copy with the original
+            attribute values.
+
+        Returns
+        -------
+        Character
+            New character with optionally updated attributes.
+
+        Examples
+        --------
+        >>> from main import Character
+        >>> character = Character(name="John Baldur")
+        >>> new_character = character.copy_with_update(update={"race": "Human"})
+        """
         return Character(
             name=update["name"] if "name" in update else self.name,
             race=update["race"] if "race" in update else self.race,
@@ -125,10 +177,27 @@ class Character(BaseModel):
         )
 
     def attack(self) -> float:
+        r"""Get the attack damage of the next attack.
+
+        Returns
+        -------
+        float
+            The attack damage of the attack.
+
+        Examples
+        --------
+        >>> from main import Character
+        >>> character = Character(name="John Baldur")
+        >>> character.attack()
+        0.0
+        """
         return self.min_damage + (self.max_damage - self.min_damage) * random.random()
 
 
 def character_factory(filename: str) -> List[Character]:
+    r"""
+    TODO
+    """
     df = pl.read_csv(filename)
     characters: List[Character] = list()
     for row in df.iter_rows(named=True):
@@ -146,6 +215,9 @@ def character_factory(filename: str) -> List[Character]:
 def battle(
     character1: Character, character2: Character, health: float = 100.0
 ) -> Character:
+    r"""
+    TODO
+    """
     health1 = health
     health2 = health
     initiative = random.random()
@@ -191,32 +263,36 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     Parameters
     ----------
-    argv : list, default = None
+    argv : list or str, or None, default = None
         Arguments passed to argparse.
 
     Returns
     -------
-    product : int
-        The product of given arguments.
+    int
+        Exit status (zero is success).
 
     Examples
     --------
     >>> from main import main
-    >>> product = main(["-f1", "1", "-f2", "2"])
-    >>> product
-    2
-    >>> product = main(["-f1", "3"])
-    >>> product
-    6
+    >>> main(["-f", "data/characters.csv"])
+    INFO:main:Both characters have 130.0 hit points! The battle begins:
+    INFO:main:Character Shadowheart has initiative!
+    INFO:main:Character Shadowheart deals 311.13673321167755 damage!
+    INFO:main:Character Shadowheart won!
+    0
     """
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        prog="main.py",
+        description="Battles two characters.",
+        epilog="(c) Micha Birklbauer, 2026",
+    )
     parser.add_argument(
         "-f",
         "--file",
         dest="file",
         required=True,
-        help="Character file to read characters from.",
+        help="character file to read characters from (str).",
         type=str,
     )
     parser.add_argument(
@@ -224,7 +300,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "--character1",
         dest="c1",
         default=0,
-        help="First character to use.",
+        help="index of the first character to use (int).",
         type=int,
     )
     parser.add_argument(
@@ -232,7 +308,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "--character2",
         dest="c2",
         default=1,
-        help="Second character to use.",
+        help="index of the second character to use (int).",
         type=int,
     )
     parser.add_argument(
@@ -240,7 +316,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "--hit-points",
         dest="health",
         default=130,
-        help="Second character to use.",
+        help="health of all characters (int).",
         type=int,
     )
     parser.add_argument("--version", action="version", version=__version)
