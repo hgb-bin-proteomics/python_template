@@ -4,6 +4,7 @@
   ],
 
   "exclude": [
+    "tests",
     "**/__pycache__",
     "**/.venv"
   ],
