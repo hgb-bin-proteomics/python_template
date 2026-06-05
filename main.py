@@ -124,7 +124,7 @@ class Character(BaseModel):
         This method should not be called manually!
         """
         if self.min_damage > self.max_damage:
-            self.__dict__["min_damage"], self.__dict__["max_damage"] = (
+            self.__dict__["min_damage"], self.__dict__["max_damage"] = (  # pyright: ignore[reportIndexIssue]
                 self.max_damage,
                 self.min_damage,
             )
@@ -220,7 +220,7 @@ def character_factory(filename: str) -> List[Character]:
         characters.append(
             Character(
                 name=str(row["name"]),
-                race=str(row["race"]) if "race" in row else None,  # ty: ignore[invalid-argument-type]
+                race=str(row["race"]) if "race" in row else None,  # pyright: ignore[reportArgumentType] # ty: ignore[invalid-argument-type]
                 min_damage=float(row["min_damage"]),
                 max_damage=float(row["max_damage"]),
             )
