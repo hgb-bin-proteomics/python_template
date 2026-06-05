@@ -195,8 +195,24 @@ class Character(BaseModel):
 
 
 def character_factory(filename: str) -> List[Character]:
-    r"""
-    TODO
+    r"""Creates a list of characters from a file.
+
+    Parameters
+    ----------
+    filename : str
+        The filename of the character ``csv`` file.
+
+    Returns
+    -------
+    lisf of Character
+        The parsed list of characters.
+
+    Examples
+    --------
+    >>> from main import character_factory
+    >>> characters = character_factory("data/characters.csv")
+    >>> characters[0].name
+    'Astarion'
     """
     df = pl.read_csv(filename)
     characters: List[Character] = list()
@@ -213,46 +229,67 @@ def character_factory(filename: str) -> List[Character]:
 
 
 def battle(
-    character1: Character, character2: Character, health: float = 100.0
+    character_1: Character, character_2: Character, health: float = 100.0
 ) -> Character:
-    r"""
-    TODO
+    r"""Makes two characters fight.
+
+    Parameters
+    ----------
+    character_1 : Character
+        One of the two characters that should battle.
+    character_2 : Character
+        One of the two characters that should battle.
+    health : float, default = 100.0
+        The amount of hit points both characters have.
+
+    Returns
+    -------
+    Character
+        The winner of the two characters.
+
+    Examples
+    --------
+    >>> from main import character_factory, battle
+    >>> characters = character_factory("data/characters.csv")
+    >>> winner = battle(characters[0], characters[1], health=10000)
+    >>> winner.name
+    'Shadowheart'
     """
-    health1 = health
-    health2 = health
+    health_1 = health
+    health_2 = health
     initiative = random.random()
     if initiative < 0.5:
-        logger.info(f"Character {character1.name} has initiative!")
+        logger.info(f"Character {character_1.name} has initiative!")
     else:
-        logger.info(f"Character {character2.name} has initiative!")
+        logger.info(f"Character {character_2.name} has initiative!")
     while True:
         if initiative < 0.5:
-            attack: float = character1.attack()
-            logger.info(f"Character {character1.name} deals {attack} damage!")
-            health2 = health2 - attack
-            if health2 <= 0:
+            attack: float = character_1.attack()
+            logger.info(f"Character {character_1.name} deals {attack} damage!")
+            health_2 -= attack
+            if health_2 <= 0:
                 break
-            attack: float = character2.attack()
-            logger.info(f"Character {character2.name} deals {attack} damage!")
-            health1 = health1 - attack
-            if health1 <= 0:
+            attack: float = character_2.attack()
+            logger.info(f"Character {character_2.name} deals {attack} damage!")
+            health_1 -= attack
+            if health_1 <= 0:
                 break
         else:
-            attack: float = character2.attack()
-            logger.info(f"Character {character2.name} deals {attack} damage!")
-            health1 = health1 - attack
-            if health1 <= 0:
+            attack: float = character_2.attack()
+            logger.info(f"Character {character_2.name} deals {attack} damage!")
+            health_1 -= attack
+            if health_1 <= 0:
                 break
-            attack: float = character1.attack()
-            logger.info(f"Character {character1.name} deals {attack} damage!")
-            health2 = health2 - attack
-            if health2 <= 0:
+            attack: float = character_1.attack()
+            logger.info(f"Character {character_1.name} deals {attack} damage!")
+            health_2 -= attack
+            if health_2 <= 0:
                 break
-    if health1 <= 0:
-        logger.info(f"Character {character2.name} won!")
-        return character2
-    logger.info(f"Character {character1.name} won!")
-    return character1
+    if health_1 <= 0:
+        logger.info(f"Character {character_2.name} won!")
+        return character_2
+    logger.info(f"Character {character_1.name} won!")
+    return character_1
 
 
 ##### MAIN FUNCTION #####
@@ -297,16 +334,16 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
     parser.add_argument(
         "-c1",
-        "--character1",
-        dest="c1",
+        "--character-1",
+        dest="character_1",
         default=0,
         help="index of the first character to use (int).",
         type=int,
     )
     parser.add_argument(
         "-c2",
-        "--character2",
-        dest="c2",
+        "--character-2",
+        dest="character_2",
         default=1,
         help="index of the second character to use (int).",
         type=int,
@@ -325,15 +362,15 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     try:
         characters = character_factory(args.file)
-        c1 = int(args.c1)
-        c2 = int(args.c2)
+        character_1 = int(args.character_1)
+        character_2 = int(args.character_2)
         health = float(args.health)
         logger.info(f"Both characters have {health} hit points! The battle begins:")
-        if c1 < 0 or c1 >= len(characters):
+        if character_1 < 0 or character_1 >= len(characters):
             raise IndexError("Character 1 is not a valid index in the character file!")
-        if c2 < 0 or c2 >= len(characters):
+        if character_2 < 0 or character_2 >= len(characters):
             raise IndexError("Character 1 is not a valid index in the character file!")
-        _ = battle(characters[c1], characters[c2], health)
+        _ = battle(characters[character_1], characters[character_2], health)
     except Exception as _e:
         logger.exception("An error occurred while running the script!")
         return 1
