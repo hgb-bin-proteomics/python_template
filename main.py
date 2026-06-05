@@ -24,8 +24,8 @@ from pydantic import BaseModel, Field, ConfigDict, computed_field
 
 from typing import Annotated, Optional, Literal, Dict, List, Any, override
 
-__version = "1.0.0"
-__date = "2024-03-11"
+__version = "2.0.0"
+__date = "2026-06-05"
 
 logger = logging.getLogger(__name__)
 
