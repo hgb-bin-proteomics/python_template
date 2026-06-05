@@ -1,39 +1,100 @@
 ![Ruff](https://github.com/michabirklbauer/python_template/workflows/Ruff%20Linting%20and%20Formatting/badge.svg)
+![Ty](https://github.com/michabirklbauer/python_template/workflows/Type-checking%20with%20ty/badge.svg)
 ![Pyright](https://github.com/michabirklbauer/python_template/workflows/Type-checking%20with%20Pyright/badge.svg)
 ![Flake8AndPytest](https://github.com/michabirklbauer/python_template/workflows/Flake8%20and%20pytest/badge.svg)
 
 # Template Repository for Python Scripts
 
-A template repository for linting, testing, GUI building and dockerizing python scripts.
+A template repository for modern python development with [uv](https://docs.astral.sh/uv/)
+using [Pydantic](https://pydantic.dev/docs/validation/latest/get-started/),
+[Polars](https://pola.rs/), and [Streamlit](https://streamlit.io/).
+Linted with [ruff](https://astral.sh/ruff),
+type checked with [ty](https://docs.astral.sh/ty/) and [pyright](https://github.com/microsoft/pyright),
+and tested with [pytest](https://docs.pytest.org/en/stable/) using
+[GitHub Actions](https://docs.github.com/en/actions).
 
 ## Checklist
 
-- Replace `YOURUSERNAME` and `IMAGENAME` in `.github/workflows/docker-image.yml` [or delete file].
-- Replace test data in `data` with your own data [or delete if you don't have test data].
-- Adjust `.gitattributes` according to your needs.
-- Adjust `.gitignore` according to your needs.
-- Setup your `CITATION.cff` according to your needs [or delete file].
-- Replace dummy values in `Dockerfile` and write image instructions.
-- Replace copyright name in `LICENSE`.
-- Replace lines 10 - 13 and write your script in `main.py`.
-- Replace lines 10 - 13 and write your gui in `gui/streamlit_app.py`.
-- Replace lines 3 - 6 and write tests in `tests/test_main.py`.
-- Add your requirements to `requirements.txt`.
-- Document your script using the [numpydoc style](https://numpydoc.readthedocs.io/en/latest/format.html) and [Sphinx](https://www.sphinx-doc.org/):
+- [ ] Replace `YOURUSERNAME` and `IMAGENAME` in `.github/workflows/docker-image.yml` [or delete file].
+- [ ] Replace test data in `data` with your own data [or delete if you don't have test data].
+- [ ] Adjust `.gitattributes` according to your needs [or delete file].
+- [ ] Adjust `.gitignore` according to your needs.
+- [ ] Setup your `CITATION.cff` according to your needs [or delete file].
+- [ ] Update attribution in `Dockerfile` and write image instructions.
+- [ ] Replace copyright name in `LICENSE`.
+- [ ] Update attribution and write your script in `main.py`.
+- [ ] Update attribution and write your gui in `app.py`.
+- [ ] Update attribution and write tests in `tests/test_main.py`.
+- [ ] Add your requirements via `uv add` and to `requirements.txt`.
+- [ ] Document your code using the [numpydoc style](https://numpydoc.readthedocs.io/en/latest/format.html) and [Sphinx](https://www.sphinx-doc.org/):
   - Adjust the configuration to your needs in `docs/conf.py`.
   - Automatically via GitHub Actions:
     - In the repository go to `Settings` ➡️ `Pages` ➡️ `Build and deployment` ➡️ `Source` ➡️ `GitHub Actions`.
     - Select the `gh-pages.yml` / `Deploy Documentation to Pages` workflow.
   - Or build manually:
-    - Install Sphinx and the [PyData](https://github.com/pydata/pydata-sphinx-theme) theme: `pip install sphinx pydata-sphinx-theme`.
-    - Build documentation with:
+    - Install Sphinx, the [PyData](https://github.com/pydata/pydata-sphinx-theme) theme, and extensions:
+      ```bash
+      pip install sphinx pydata-sphinx-theme myst-parser sphinx-copybutton
       ```
+    - Build documentation with:
+      ```bash
       sphinx-apidoc -f -o docs .
       sphinx-build -b html docs html
       ```
     - Publish documentation [optional]!
     - Serving with GitHub pages needs the addition of an empty `.nojekyll` file to your `/html`.
-- Adjust this `README.md` to your needs!
+- [ ] Decide on a type checker and delete the other!
+- [ ] Adjust this `README.md` to your needs!
+
+## Helpful Commands
+
+- uv:
+  ```bash
+  uv add
+  ```
+  ```bash
+  uv lock --upgrade
+  ```
+  ```bash
+  uv sync
+  ```
+- ruff:
+  ```bash
+  ruff check --fix
+  ```
+  ```bash
+  ruff format
+  ```
+- ty:
+  ```bash
+  ty check --config-file ty.toml
+  ```
+- pyright:
+  ```bash
+  pyright
+  ```
+- pytest:
+  ```bash
+  pytest -c pytest.ini --durations=10 --durations-min=1.0 tests/
+  ```
+- streamlit:
+  ```bash
+  uv run streamlit run app.py
+  ```
+
+## Getting Help
+
+- Help for this template:
+  - [uv](https://docs.astral.sh/uv/): Python project and dependency management.
+  - [ruff](https://astral.sh/ruff): Python linter and formatter.
+  - [ty](https://docs.astral.sh/ty/): Python type checker.
+  - [pyright](https://github.com/microsoft/pyright): Python type checker.
+  - [pytest](https://docs.pytest.org/en/stable/): Python testing suit.
+  - [GitHub Actions](https://docs.github.com/en/actions): Used for running the above automatically.
+- Contact: [micha.birklbauer@gmail.com](mailto:micha.birklbauer@gmail.com)
+
+> [!IMPORTANT]
+> The below sections should be adjusted and updated by you!
 
 ## Known Issues
 
@@ -41,7 +102,7 @@ A template repository for linting, testing, GUI building and dockerizing python 
 
 ## Citing
 
-If you are using PLACEHOLDER script please cite:
+If you are using PLACEHOLDER please cite:
 ```
 Very important title
 Important Author, and Another Important Author
@@ -55,4 +116,4 @@ DOI: 12.3456/cool-stuff
 
 ## Contact
 
-- [micha.birklbauer@gmail.com](mailto:micha.birklbauer@gmail.com)
+- [your.mail@mail.com](mailto:your.mail@mail.com)

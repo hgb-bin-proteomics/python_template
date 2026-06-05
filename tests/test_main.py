@@ -1,24 +1,59 @@
 #!/usr/bin/env python3
 
 # SCRIPT NAME - TESTS
-# 2023 (c) Micha Johannes Birklbauer
-# https://github.com/michabirklbauer/
-# micha.birklbauer@gmail.com
+# 2026 (c) YOUR NAME
+# https://github.com/username/
+# your.mail@mail.com
+
+import pytest
 
 
 def test1():
-    import pandas as pd
+    from streamlit.testing.v1 import AppTest
 
-    df = pd.read_csv("data/example_data.csv")
-
-    from main import my_product
-
-    for i, row in df.iterrows():
-        assert my_product(int(row["x"]), int(row["y"])) == int(row["x"]) * int(row["y"])
+    at = AppTest.from_file("app.py", default_timeout=30.0)
+    at.run(timeout=60.0)
+    assert not at.exception
 
 
 def test2():
+    from main import Character
+
+    character = Character(name="John Baldur")
+    assert character["name"] == "John Baldur"
+
+
+def test3():
+    from main import Character
+
+    character = Character(name="John Baldur")
+    new_character = character.copy_with_update(update={"race": "Human"})
+    assert new_character.race == "Human"
+
+
+def test4():
+    from main import Character
+
+    character = Character(name="John Baldur")
+    assert character.attack() == pytest.approx(0.0)
+
+
+def test5():
+    from main import character_factory
+
+    characters = character_factory("data/characters.csv")
+    assert characters[0].name == "Astarion"
+
+
+def test6():
+    from main import character_factory, battle
+
+    characters = character_factory("data/characters.csv")
+    winner = battle(characters[0], characters[1], health=10000)
+    assert winner.name == "Shadowheart"
+
+
+def test7():
     from main import main
 
-    assert main(["-f1", "20"]) == 40
-    assert main(["-f1", "2", "-f2", "3"]) == 6
+    assert main(["-f", "data/characters.csv"]) == 0

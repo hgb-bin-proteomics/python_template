@@ -1,13 +1,14 @@
-name: Ruff Linting and Formatting
+name: Type-checking with ty
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
 
 jobs:
-  ruff:
+  ty:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
@@ -18,11 +19,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install ruff
+        python -m pip install ty
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with Ruff
+    - name: Type-check with ty
       run: |
-        ruff check
-    - name: Check format with Ruff
-      run: |
-        ruff format --check
+        ty check --config-file ty.toml

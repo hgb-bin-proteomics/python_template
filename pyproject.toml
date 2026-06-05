@@ -3,8 +3,9 @@ name = "python-template"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.12"
 dependencies = [
-    "pandas>=2.0.3",
-    "streamlit>=1.40.1",
+    "polars>=1.41.2",
+    "pydantic>=2.13.4",
+    "streamlit>=1.58.0",
 ]
