@@ -15,4 +15,4 @@ RUN pip install --upgrade setuptools
 RUN pip install --no-cache-dir uv
 RUN uv sync --no-cache
 
-CMD  ["uv", "run", "streamlit", "run", "streamlit_app.py"]
+CMD  ["uv", "run", "streamlit", "run", "app.py"]
