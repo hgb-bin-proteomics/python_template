@@ -2,18 +2,17 @@
 # author: YOUR NAME
 # version: 1.0.0
 
-FROM python:3.12.0
+FROM python:3.14
 
 LABEL maintainer="you@yourname.com"
 
 RUN mkdir app
-RUN mkdir app/.streamlit
-COPY requirements.txt app
-COPY main.py app
-COPY gui/streamlit_app.py app
-COPY gui/.streamlit/config.toml app/.streamlit
+COPY ./ app/
 WORKDIR app
-RUN pip install -r requirements.txt
-RUN pip install streamlit
 
-CMD  ["streamlit", "run", "streamlit_app.py"]
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
+RUN pip install --no-cache-dir uv
+RUN uv sync --no-cache
+
+CMD  ["uv", "run", "streamlit", "run", "streamlit_app.py"]
