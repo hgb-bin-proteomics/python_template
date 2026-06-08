@@ -63,7 +63,13 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
   ruff check --fix
   ```
   ```bash
+  ruff check --config ruff.toml
+  ```
+  ```bash
   ruff format
+  ```
+  ```bash
+  ruff format --config ruff.toml
   ```
 - ty:
   ```bash
