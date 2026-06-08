@@ -49,28 +49,35 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
 ## Helpful Commands
 
 - uv:
-  ```bash
-  uv add
-  ```
-  ```bash
-  uv lock --upgrade
-  ```
-  ```bash
-  uv sync
-  ```
+  - Add a dependency/package [`pkg`]:
+    ```bash
+    uv add pkg
+    ```
+  - Upgrade dependencies/packages:
+    ```bash
+    uv lock --upgrade
+    ```
+  - Update environment:
+    ```bash
+    uv sync
+    ```
 - ruff:
-  ```bash
-  ruff check --fix
-  ```
-  ```bash
-  ruff check --config ruff.toml
-  ```
-  ```bash
-  ruff format
-  ```
-  ```bash
-  ruff format --config ruff.toml
-  ```
+  - Check and fix (fixable) errors:
+    ```bash
+    ruff check --fix
+    ```
+  - Check (with explicit config file):
+    ```bash
+    ruff check --config ruff.toml
+    ```
+  - Format code:
+    ```bash
+    ruff format
+    ```
+  - Format (with explicit config file):
+    ```bash
+    ruff format --config ruff.toml
+    ```
 - ty:
   ```bash
   ty check --config-file ty.toml
