@@ -24,13 +24,14 @@ import streamlit as st
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 from main import Character, character_factory, battle
 
-from typing import List
-
 
 @st.cache_data
 def read_characters(
     uploaded_file: UploadedFile,
-) -> List[Character]:
+) -> list[Character]:
+    r"""
+    Reads an uploaded character file.
+    """
     with NamedTemporaryFile(
         suffix=os.path.splitext(uploaded_file.name)[1], delete_on_close=False
     ) as f:
@@ -41,6 +42,9 @@ def read_characters(
 
 # main page content
 def main_page():
+    r"""
+    The Streamlit main page.
+    """
     title = st.title("TITLE")
 
     general_description = """
@@ -112,6 +116,9 @@ def main_page():
 
 # side bar and main page loader
 def main():
+    r"""
+    Streamlit app main function.
+    """
     about_str = """
     ABOUT
     """
@@ -143,8 +150,8 @@ def main():
     contact_str = "**Contact:**\n- CONTACT INFO"
     contact = st.sidebar.markdown(contact_str)
 
-    license_str = "**License:**\n- [MIT License](https://github.com/YOUR_REPO/blob/master/LICENSE.md)"
-    license = st.sidebar.markdown(license_str)
+    project_license_str = "**License:**\n- [MIT License](https://github.com/YOUR_REPO/blob/master/LICENSE.md)"
+    project_license = st.sidebar.markdown(project_license_str)
 
     project_str = "**Project Page:**\n- [GitHub](https://github.com/YOUR_REPO/)"
     project = st.sidebar.markdown(project_str)

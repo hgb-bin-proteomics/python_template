@@ -14,6 +14,29 @@
 # https://github.com/username/
 # your.mail@mail.com
 
+r"""Battles two characters.
+
+.. code-block:: text
+   :caption: Example Usage
+
+   usage: main.py [-h] -f FILE [-c1 CHARACTER_1] [-c2 CHARACTER_2] [-hp HEALTH] [--version]
+
+   Battles two characters.
+
+   options:
+     -h, --help            show this help message and exit
+     -f, --file FILE       character file to read characters from (str).
+     -c1, --character-1 CHARACTER_1
+                           index of the first character to use (int).
+     -c2, --character-2 CHARACTER_2
+                           index of the second character to use (int).
+     -hp, --hit-points HEALTH
+                           health of all characters (int).
+     --version             show program's version number and exit
+
+   (c) Micha Birklbauer, 2026
+"""
+
 from __future__ import annotations
 
 import argparse
@@ -22,7 +45,7 @@ import logging
 import polars as pl
 from pydantic import BaseModel, Field, ConfigDict, computed_field
 
-from typing import Annotated, Optional, Literal, Dict, List, Any, override
+from typing import Annotated, Optional, Literal, Any, override
 
 __version = "2.0.0"
 __date = "2026-06-05"
@@ -135,8 +158,8 @@ class Character(BaseModel):
         """
         try:
             return getattr(self, key)
-        except AttributeError:
-            raise KeyError(f"'{key}' is not a valid field!")
+        except AttributeError as e:
+            raise KeyError(f"'{key}' is not a valid field!") from e
 
     def __contains__(self, key: str) -> bool:
         r"""
@@ -144,7 +167,7 @@ class Character(BaseModel):
         """
         return hasattr(self, key)
 
-    def copy_with_update(self, update: Dict[str, Any] = {}) -> Character:
+    def copy_with_update(self, update: dict[str, Any] = {}) -> Character:
         r"""Creates a deep copy of the class with optional attribute updates.
 
         Parameters
@@ -191,10 +214,10 @@ class Character(BaseModel):
         >>> character.attack()
         0.0
         """
-        return self.min_damage + (self.max_damage - self.min_damage) * random.random()
+        return self.min_damage + (self.max_damage - self.min_damage) * random.random()  # noqa: S311
 
 
-def character_factory(filename: str) -> List[Character]:
+def character_factory(filename: str) -> list[Character]:
     r"""Creates a list of characters from a file.
 
     Parameters
@@ -215,7 +238,7 @@ def character_factory(filename: str) -> List[Character]:
     'Astarion'
     """
     df = pl.read_csv(filename)
-    characters: List[Character] = list()
+    characters: list[Character] = list()
     for row in df.iter_rows(named=True):
         characters.append(
             Character(
@@ -257,7 +280,7 @@ def battle(
     """
     health_1 = health
     health_2 = health
-    initiative = random.random()
+    initiative = random.random()  # noqa: S311
     if initiative < 0.5:
         logger.info(f"Character {character_1.name} has initiative!")
     else:
@@ -295,7 +318,7 @@ def battle(
 ##### MAIN FUNCTION #####
 
 
-def main(argv: Optional[List[str]] = None) -> int:
+def main(argv: Optional[list[str]] = None) -> int:
     """Main function.
 
     Parameters
