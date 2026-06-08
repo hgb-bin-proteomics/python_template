@@ -188,7 +188,7 @@ class Character(BaseModel):
         >>> character = Character(name="John Baldur")
         >>> new_character = character.copy_with_update(update={"race": "Human"})
         """
-        a = "a"
+
         
         
         return Character(
