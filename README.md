@@ -61,6 +61,14 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
     ```bash
     uv sync
     ```
+  - Run python:
+    ```bash
+    uv run python
+    ```
+  - Run a script (with arguments):
+    ```bash
+    uv run main.py -h
+    ```
 - [ruff](https://docs.astral.sh/ruff/):
   - Check and fix (fixable) errors:
     ```bash
