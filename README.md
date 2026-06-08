@@ -90,7 +90,7 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
   ```bash
   ty check --config-file ty.toml
   ```
-- [pyright](https://microsoft.github.io/pyright/#/):
+- [pyright](https://microsoft.github.io/pyright):
   ```bash
   pyright
   ```
@@ -107,9 +107,9 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
 
 - Help for this template:
   - [uv](https://docs.astral.sh/uv/): Python project and dependency management.
-  - [ruff](https://astral.sh/ruff): Python linter and formatter.
+  - [ruff](https://docs.astral.sh/ruff/): Python linter and formatter.
   - [ty](https://docs.astral.sh/ty/): Python type checker.
-  - [pyright](https://github.com/microsoft/pyright): Python type checker.
+  - [pyright](https://microsoft.github.io/pyright): Python type checker.
   - [pytest](https://docs.pytest.org/en/stable/): Python testing suit.
   - [GitHub Actions](https://docs.github.com/en/actions): Used for running the above automatically.
 - Contact: [micha.birklbauer@gmail.com](mailto:micha.birklbauer@gmail.com)
