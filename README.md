@@ -48,36 +48,57 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
 
 ## Helpful Commands
 
-- uv:
-  ```bash
-  uv add
-  ```
-  ```bash
-  uv lock --upgrade
-  ```
-  ```bash
-  uv sync
-  ```
-- ruff:
-  ```bash
-  ruff check --fix
-  ```
-  ```bash
-  ruff format
-  ```
-- ty:
+- [uv](https://docs.astral.sh/uv/):
+  - Add a dependency/package [`pkg`]:
+    ```bash
+    uv add pkg
+    ```
+  - Upgrade dependencies/packages:
+    ```bash
+    uv lock --upgrade
+    ```
+  - Update environment:
+    ```bash
+    uv sync
+    ```
+  - Run python:
+    ```bash
+    uv run python
+    ```
+  - Run a script (with arguments):
+    ```bash
+    uv run main.py -h
+    ```
+- [ruff](https://docs.astral.sh/ruff/):
+  - Check and fix (fixable) errors:
+    ```bash
+    ruff check --fix
+    ```
+  - Check (with explicit config file):
+    ```bash
+    ruff check --config ruff.toml
+    ```
+  - Format code:
+    ```bash
+    ruff format
+    ```
+  - Format (with explicit config file):
+    ```bash
+    ruff format --config ruff.toml
+    ```
+- [ty](https://docs.astral.sh/ty/):
   ```bash
   ty check --config-file ty.toml
   ```
-- pyright:
+- [pyright](https://microsoft.github.io/pyright):
   ```bash
   pyright
   ```
-- pytest:
+- [pytest](https://docs.pytest.org/en/stable/):
   ```bash
   pytest -c pytest.ini --durations=10 --durations-min=1.0 tests/
   ```
-- streamlit:
+- [streamlit](https://docs.streamlit.io/):
   ```bash
   uv run streamlit run app.py
   ```
@@ -86,9 +107,9 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
 
 - Help for this template:
   - [uv](https://docs.astral.sh/uv/): Python project and dependency management.
-  - [ruff](https://astral.sh/ruff): Python linter and formatter.
+  - [ruff](https://docs.astral.sh/ruff/): Python linter and formatter.
   - [ty](https://docs.astral.sh/ty/): Python type checker.
-  - [pyright](https://github.com/microsoft/pyright): Python type checker.
+  - [pyright](https://microsoft.github.io/pyright): Python type checker.
   - [pytest](https://docs.pytest.org/en/stable/): Python testing suit.
   - [GitHub Actions](https://docs.github.com/en/actions): Used for running the above automatically.
 - Contact: [micha.birklbauer@gmail.com](mailto:micha.birklbauer@gmail.com)
