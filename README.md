@@ -9,7 +9,7 @@ A template repository for modern python development with [uv](https://docs.astra
 using [Pydantic](https://pydantic.dev/docs/validation/latest/get-started/),
 [Polars](https://pola.rs/), and [Streamlit](https://streamlit.io/).
 Linted with [ruff](https://astral.sh/ruff),
-type checked with [ty](https://docs.astral.sh/ty/) and [pyright](https://github.com/microsoft/pyright),
+type checked with [ty](https://docs.astral.sh/ty/) and [pyright](https://microsoft.github.io/pyright),
 and tested with [pytest](https://docs.pytest.org/en/stable/) using
 [GitHub Actions](https://docs.github.com/en/actions).
 
