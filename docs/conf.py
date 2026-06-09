@@ -55,9 +55,9 @@ html_theme_options = {
     "header_links_before_dropdown": 5,
     "external_links": [
         {"name": "uv", "url": "https://docs.astral.sh/uv/"},
-        {"name": "ruff", "url": "https://astral.sh/ruff"},
+        {"name": "ruff", "url": "https://docs.astral.sh/ruff/"},
         {"name": "ty", "url": "https://docs.astral.sh/ty/"},
-        {"name": "pyright", "url": "https://github.com/microsoft/pyright"},
+        {"name": "pyright", "url": "https://microsoft.github.io/pyright"},
         {"name": "pytest", "url": "https://docs.pytest.org/en/stable/"},
     ],
     "icon_links": [
