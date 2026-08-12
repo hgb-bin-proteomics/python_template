@@ -1,7 +1,7 @@
 ![Ruff](https://github.com/michabirklbauer/python_template/workflows/Ruff%20Linting%20and%20Formatting/badge.svg)
 ![Ty](https://github.com/michabirklbauer/python_template/workflows/Type-checking%20with%20ty/badge.svg)
 ![Pyright](https://github.com/michabirklbauer/python_template/workflows/Type-checking%20with%20Pyright/badge.svg)
-![Flake8AndPytest](https://github.com/michabirklbauer/python_template/workflows/Flake8%20and%20pytest/badge.svg)
+![Pytest](https://github.com/michabirklbauer/python_template/workflows/Testing%20with%20pytest/badge.svg)
 
 # Template Repository for Python Scripts
 
