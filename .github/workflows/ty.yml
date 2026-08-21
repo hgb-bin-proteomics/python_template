@@ -23,7 +23,8 @@ jobs:
     - name: Setup uv
       run: |
         uv python pin 3.14
-        uv add ty
+        uv add --dev ty
+        uv lock --upgrade-package ty
     - name: Type-check with ty
       run: |
         uv run ty check --config-file ty.toml

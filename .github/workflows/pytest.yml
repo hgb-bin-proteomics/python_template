@@ -27,7 +27,8 @@ jobs:
     - name: Setup uv
       run: |
         uv python pin ${{ matrix.python-version }}
-        uv add pytest
+        uv add --dev pytest
+        uv lock --upgrade-package pytest
     - name: Test with pytest
       run: |
         uv run pytest -c pytest.ini --durations=10 --durations-min=1.0 tests/

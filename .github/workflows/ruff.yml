@@ -22,7 +22,8 @@ jobs:
     - name: Setup uv
       run: |
         uv python pin 3.14
-        uv add ruff
+        uv add --dev ruff
+        uv lock --upgrade-package ruff
     - name: Lint with Ruff
       run: |
         uv run ruff check --output-format github --config ruff.toml
