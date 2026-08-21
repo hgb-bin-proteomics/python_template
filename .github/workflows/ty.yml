@@ -1,4 +1,4 @@
-name: Type-checking with ty
+name: Type-check with ty
 
 on:
   push:
