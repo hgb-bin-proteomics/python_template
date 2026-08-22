@@ -1,7 +1,7 @@
-![Ruff](https://github.com/michabirklbauer/python_template/workflows/Ruff%20Linting%20and%20Formatting/badge.svg)
-![Ty](https://github.com/michabirklbauer/python_template/workflows/Type-checking%20with%20ty/badge.svg)
-![Pyright](https://github.com/michabirklbauer/python_template/workflows/Type-checking%20with%20Pyright/badge.svg)
-![Flake8AndPytest](https://github.com/michabirklbauer/python_template/workflows/Flake8%20and%20pytest/badge.svg)
+![Ruff](https://github.com/michabirklbauer/python_template/workflows/Ruff%20Lint%20and%20Format/badge.svg)
+![Ty](https://github.com/michabirklbauer/python_template/workflows/Type-check%20with%20ty/badge.svg)
+![Pyright](https://github.com/michabirklbauer/python_template/workflows/Type-check%20with%20Pyright/badge.svg)
+![Pytest](https://github.com/michabirklbauer/python_template/workflows/Test%20with%20pytest/badge.svg)
 
 # Template Repository for Python Scripts
 
@@ -32,14 +32,14 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
     - In the repository go to `Settings` ➡️ `Pages` ➡️ `Build and deployment` ➡️ `Source` ➡️ `GitHub Actions`.
     - Select the `gh-pages.yml` / `Deploy Documentation to Pages` workflow.
   - Or build manually:
-    - Install Sphinx, the [PyData](https://github.com/pydata/pydata-sphinx-theme) theme, and extensions:
+    - Install documentation dependencies via:
       ```bash
-      pip install sphinx pydata-sphinx-theme myst-parser sphinx-copybutton
+      uv sync --group docs
       ```
     - Build documentation with:
       ```bash
-      sphinx-apidoc -f -o docs .
-      sphinx-build -b html docs html
+      uv run sphinx-apidoc -f -o docs .
+      uv run sphinx-build -b html docs html
       ```
     - Publish documentation [optional]!
     - Serving with GitHub pages needs the addition of an empty `.nojekyll` file to your `/html`.
@@ -72,31 +72,31 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
 - [ruff](https://docs.astral.sh/ruff/):
   - Check and fix (fixable) errors:
     ```bash
-    ruff check --fix
+    uv run ruff check --config ruff.toml --fix
     ```
   - Check (with explicit config file):
     ```bash
-    ruff check --config ruff.toml
+    uv run ruff check --config ruff.toml
     ```
   - Format code:
     ```bash
-    ruff format
+    uv run ruff format
     ```
   - Format (with explicit config file):
     ```bash
-    ruff format --config ruff.toml
+    uv run ruff format --config ruff.toml
     ```
 - [ty](https://docs.astral.sh/ty/):
   ```bash
-  ty check --config-file ty.toml
+  uv run ty check --config-file ty.toml
   ```
 - [pyright](https://microsoft.github.io/pyright):
   ```bash
-  pyright
+  uv run pyright --warnings
   ```
 - [pytest](https://docs.pytest.org/en/stable/):
   ```bash
-  pytest -c pytest.ini --durations=10 --durations-min=1.0 tests/
+  uv run pytest -c pytest.ini --durations=10 --durations-min=1.0 tests/
   ```
 - [streamlit](https://docs.streamlit.io/):
   ```bash
