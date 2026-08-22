@@ -37,7 +37,7 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
 ## Code Quality and Style
 
 - Use [ruff](https://docs.astral.sh/ruff/) for linting.
-- Run `uv run ruff check --config ruff.toml`.
+- Run `uv run ruff check --config ruff.toml` to make sure all the python code in the repository passes linting.
 - Make sure to use an up-to-date version of ruff, e.g. by running `uv lock --upgrade-package ruff`.
 - Linting errors might be fixable with `uv run ruff check --config ruff.toml --fix`.
 - Use [ruff](https://docs.astral.sh/ruff/) for code formatting.
