@@ -1,8 +1,3 @@
-![Ruff](https://github.com/michabirklbauer/python_template/workflows/Ruff%20Linting%20and%20Formatting/badge.svg)
-![Ty](https://github.com/michabirklbauer/python_template/workflows/Type-checking%20with%20ty/badge.svg)
-![Pyright](https://github.com/michabirklbauer/python_template/workflows/Type-checking%20with%20Pyright/badge.svg)
-![Pytest](https://github.com/michabirklbauer/python_template/workflows/Testing%20with%20pytest/badge.svg)
-
 # Template Repository for Python Scripts
 
 A template repository for modern python development with [uv](https://docs.astral.sh/uv/)
@@ -13,128 +8,80 @@ type checked with [ty](https://docs.astral.sh/ty/) and [pyright](https://microso
 and tested with [pytest](https://docs.pytest.org/en/stable/) using
 [GitHub Actions](https://docs.github.com/en/actions).
 
-## Checklist
+## Repository Structure
 
-- [ ] Replace `YOURUSERNAME` and `IMAGENAME` in `.github/workflows/docker-image.yml` [or delete file].
-- [ ] Replace test data in `data` with your own data [or delete if you don't have test data].
-- [ ] Adjust `.gitattributes` according to your needs [or delete file].
-- [ ] Adjust `.gitignore` according to your needs.
-- [ ] Setup your `CITATION.cff` according to your needs [or delete file].
-- [ ] Update attribution in `Dockerfile` and write image instructions.
-- [ ] Replace copyright name in `LICENSE`.
-- [ ] Update attribution and write your script in `main.py`.
-- [ ] Update attribution and write your gui in `app.py`.
-- [ ] Update attribution and write tests in `tests/test_main.py`.
-- [ ] Add your requirements via `uv add` and to `requirements.txt`.
-- [ ] Document your code using the [numpydoc style](https://numpydoc.readthedocs.io/en/latest/format.html) and [Sphinx](https://www.sphinx-doc.org/):
-  - Adjust the configuration to your needs in `docs/conf.py`.
-  - Automatically via GitHub Actions:
-    - In the repository go to `Settings` ➡️ `Pages` ➡️ `Build and deployment` ➡️ `Source` ➡️ `GitHub Actions`.
-    - Select the `gh-pages.yml` / `Deploy Documentation to Pages` workflow.
-  - Or build manually:
-    - Install Sphinx, the [PyData](https://github.com/pydata/pydata-sphinx-theme) theme, and extensions:
-      ```bash
-      pip install sphinx pydata-sphinx-theme myst-parser sphinx-copybutton
-      ```
-    - Build documentation with:
-      ```bash
-      sphinx-apidoc -f -o docs .
-      sphinx-build -b html docs html
-      ```
-    - Publish documentation [optional]!
-    - Serving with GitHub pages needs the addition of an empty `.nojekyll` file to your `/html`.
-- [ ] Decide on a type checker and delete the other!
-- [ ] Adjust this `README.md` to your needs!
+- `main.py` is the main entry point and contains all application logic.
+- `main.py` should be self contained, do not split application logic into multiple files.
+- `main.py` can be renamed to have a more descriptive name.
+- `app.py` contains the [Streamlit](https://streamlit.io/) web app code.
+- `app.py` should import any necessary functionality from `main.py`.
+- Tests should go into the `tests/` directory.
+- Every test file should have a `test_` prefix.
+- Configuration for [Sphinx](https://www.sphinx-doc.org/) should go into the `docs/` directory.
 
-## Helpful Commands
+## Setup
 
-- [uv](https://docs.astral.sh/uv/):
-  - Add a dependency/package [`pkg`]:
-    ```bash
-    uv add pkg
-    ```
-  - Upgrade dependencies/packages:
-    ```bash
-    uv lock --upgrade
-    ```
-  - Update environment:
-    ```bash
-    uv sync
-    ```
-  - Run python:
-    ```bash
-    uv run python
-    ```
-  - Run a script (with arguments):
-    ```bash
-    uv run main.py -h
-    ```
-- [ruff](https://docs.astral.sh/ruff/):
-  - Check and fix (fixable) errors:
-    ```bash
-    ruff check --fix
-    ```
-  - Check (with explicit config file):
-    ```bash
-    ruff check --config ruff.toml
-    ```
-  - Format code:
-    ```bash
-    ruff format
-    ```
-  - Format (with explicit config file):
-    ```bash
-    ruff format --config ruff.toml
-    ```
-- [ty](https://docs.astral.sh/ty/):
-  ```bash
-  ty check --config-file ty.toml
-  ```
-- [pyright](https://microsoft.github.io/pyright):
-  ```bash
-  pyright
-  ```
-- [pytest](https://docs.pytest.org/en/stable/):
-  ```bash
-  pytest -c pytest.ini --durations=10 --durations-min=1.0 tests/
-  ```
-- [streamlit](https://docs.streamlit.io/):
-  ```bash
-  uv run streamlit run app.py
-  ```
+- Make sure to install [uv](https://docs.astral.sh/uv/getting-started/installation/).
+- If python is already installed, uv can easily be installed via `pip install uv`.
+- Or prompt the user to install it preemptively.
+- Execute all commands in a shell (e.g. bash) in the repository root.
 
-## Getting Help
+## Managing the python Environment
 
-- Help for this template:
-  - [uv](https://docs.astral.sh/uv/): Python project and dependency management.
-  - [ruff](https://docs.astral.sh/ruff/): Python linter and formatter.
-  - [ty](https://docs.astral.sh/ty/): Python type checker.
-  - [pyright](https://microsoft.github.io/pyright): Python type checker.
-  - [pytest](https://docs.pytest.org/en/stable/): Python testing suit.
-  - [GitHub Actions](https://docs.github.com/en/actions): Used for running the above automatically.
-- Contact: [micha.birklbauer@gmail.com](mailto:micha.birklbauer@gmail.com)
+- Use [uv](https://docs.astral.sh/uv/) to manage the projects python environment.
+- When using uv for the first time in this repository, make sure to call `uv sync --all-groups` to install all tools and dependency groups.
+- Use `uv add <pkg>` to add and install a package.
+- Use `uv add --dev <pkg>` to add and install a package needed only for development.
+- Use `uv add --group docs <pkg>` to add and install a package needed only for documentation.
 
-> [!IMPORTANT]
-> The below sections should be adjusted and updated by you!
+## Code Quality and Style
 
-## Known Issues
+- Use [ruff](https://docs.astral.sh/ruff/) for linting.
+- Run `uv run ruff check --config ruff.toml`.
+- Make sure to use an up-to-date version of ruff, e.g. by running `uv lock --upgrade-package ruff`.
+- Linting errors might be fixable with `uv run ruff check --config ruff.toml --fix`.
+- Use [ruff](https://docs.astral.sh/ruff/) for code formatting.
+- Run `uv run ruff format --config ruff.toml` to format all python files.
+- Make sure to use an up-to-date version of ruff, e.g. by running `uv lock --upgrade-package ruff`.
+- Check with `uv run ruff format --config ruff.toml --check` that all python files in the repository are properly formatted.
+- Use type annotation wherever possible.
+- Avoid the `Any` type unless it makes sense.
+- Make sure to follow [PEP 585](https://peps.python.org/pep-0585/) standard for type annotation.
+- Use `typing.Optional` for optional arguments instead of `X | None`.
+- Prompt the user to select either [ty](https://docs.astral.sh/ty/) or [pyright](https://microsoft.github.io/pyright) for type checking.
+- Run `uv run ty check --config-file ty.toml` to type check all python files with ty.
+- Run `uv run pyright --warnings` to type check all python files with pyright.
+- Make sure to use an up-to-date version of ty, e.g. by running `uv lock --upgrade-package ty`.
+- Make sure to use an up-to-date version of pyright, e.g. by running `uv lock --upgrade-package pyright`.
+- Make sure to follow python naming conventions and code style, e.g. defined via [PEP 8](https://peps.python.org/pep-0008/).
+- Use [Pydantic](https://pydantic.dev/docs/validation/latest/get-started/) for classes as also demonstrated in the `main.py` file.
+- Function parameters should ideally be type checked using `isinstance()` or other suitable python type checking methods, do not use the [Typeguard](https://github.com/agronholm/typeguard) library for this purpose unless specifically prompted.
+- Use `logging` for logging state and events of python code.
+- Use `argparse` in the `main.py` file to parse commandline arguments.
 
-[List of known issues](https://github.com/michabirklbauer/python_template/issues)
+## Testing
 
-## Citing
+- Use [pytest](https://docs.pytest.org/en/stable/) for testing python code.
+- Configuration for pytest should go into the `pytest.ini` file.
+- Tests should go into the `tests/` directory.
+- Every test file should have a `test_` prefix.
+- Run `uv run pytest -c pytest.ini --durations=10 --durations-min=1.0 tests/` to run all tests. The process should exit with code 0 if all tests pass.
 
-If you are using PLACEHOLDER please cite:
-```
-Very important title
-Important Author, and Another Important Author
-Journal of Cool Stuff 2023 12 (3), 4567-4589
-DOI: 12.3456/cool-stuff
-```
+## Documentation
 
-## License
+- Use [numpydoc style](https://numpydoc.readthedocs.io/en/latest/format.html) for inline documentation.
+- Use [Sphinx](https://www.sphinx-doc.org/) for setting up `html` documentation.
+- Configuration for Sphinx should go into the `docs/` directory.
+- The `html` documentation can be built locally by running `uv run sphinx-apidoc -f -o docs .` and `uv run sphinx-build -b html docs html`.
 
-- [MIT](https://github.com/michabirklbauer/python_template/blob/master/LICENSE)
+## Docker
 
-## Contact
+- The Docker image can be built with `docker build . -t Dockerfile -t <name>` where `<name>` is the repository name.
+- Make sure to have a clean image build context, e.g. by running `git clean -f -d -X`.
 
-- [your.mail@mail.com](mailto:your.mail@mail.com)
+## CI/CD
+
+- Workflows for [GitHub Actions](https://docs.github.com/en/actions) can be found in `.github/workflows`.
+- Pull requests that target `master` should come from the `develop` branch when using this template.
+- The `branch-protection.yml` workflow can be removed if pull requests targeting `master` should be allowed from any branch.
+- The `gh-pages.yml` workflow automatically deploys the `html` documentation to [GitHub Pages](https://docs.github.com/en/pages).
