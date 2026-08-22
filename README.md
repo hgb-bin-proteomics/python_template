@@ -72,31 +72,31 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
 - [ruff](https://docs.astral.sh/ruff/):
   - Check and fix (fixable) errors:
     ```bash
-    ruff check --fix
+    uv run ruff check --config ruff.toml --fix
     ```
   - Check (with explicit config file):
     ```bash
-    ruff check --config ruff.toml
+    uv run ruff check --config ruff.toml
     ```
   - Format code:
     ```bash
-    ruff format
+    uv run ruff format
     ```
   - Format (with explicit config file):
     ```bash
-    ruff format --config ruff.toml
+    uv run ruff format --config ruff.toml
     ```
 - [ty](https://docs.astral.sh/ty/):
   ```bash
-  ty check --config-file ty.toml
+  uv run ty check --config-file ty.toml
   ```
 - [pyright](https://microsoft.github.io/pyright):
   ```bash
-  pyright
+  uv run pyright --warnings
   ```
 - [pytest](https://docs.pytest.org/en/stable/):
   ```bash
-  pytest -c pytest.ini --durations=10 --durations-min=1.0 tests/
+  uv run pytest -c pytest.ini --durations=10 --durations-min=1.0 tests/
   ```
 - [streamlit](https://docs.streamlit.io/):
   ```bash
