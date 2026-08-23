@@ -39,6 +39,9 @@ and tested with [pytest](https://docs.pytest.org/en/stable/) using
     - Build documentation with:
       ```bash
       uv run sphinx-apidoc -f -o docs .
+      ```
+      and
+      ```bash
       uv run sphinx-build -b html docs html
       ```
     - Publish documentation [optional]!
