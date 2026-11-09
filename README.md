@@ -13,6 +13,10 @@ type checked with [ty](https://docs.astral.sh/ty/) and [pyright](https://microso
 and tested with [pytest](https://docs.pytest.org/en/stable/) using
 [GitHub Actions](https://docs.github.com/en/actions).
 
+> [!NOTE]
+> If you are developing a python package rather than a script, check out
+> [this repository](https://github.com/michabirklbauer/python-pkg_template).
+
 ## Checklist
 
 - [ ] Replace `YOURUSERNAME` and `IMAGENAME` in `.github/workflows/docker-image.yml` [or delete file].
